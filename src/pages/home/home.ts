@@ -2,20 +2,22 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 @Component({
-  templateUrl: 'build/pages/home/home.html'
+  selector: 'page-home',
+  templateUrl: 'home.html'
 })
 export class HomePage {
 
   map: any;
 
-  constructor(public navCtrl: NavController) {
-  }
+  constructor(
+    public navCtrl: NavController
+  ) {}
 
-  ionViewLoaded(){
+  ionViewDidLoad(){
     let mapEle = document.getElementById('map');
     let map = new google.maps.Map(mapEle, {
       center: {lat: 4.5981, lng: -74.0758},
-      zoom: 8
+      zoom: 12
     });
 
     google.maps.event.addListenerOnce(map, 'idle', () => {
