@@ -24,7 +24,8 @@ export class HomePage {
   }
 
   obtenerPosicion():any{
-    this.geolocation.getCurrentPosition().then(response => {
+    this.geolocation.getCurrentPosition()
+    .then(response => {
       this.loadMap(response);
     })
     .catch(error =>{
@@ -32,14 +33,18 @@ export class HomePage {
     })
   }
 
-  loadMap(postion: Geoposition){
-    let latitude = postion.coords.latitude;
-    let longitude = postion.coords.longitude;
+  loadMap(position: Geoposition){
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+    console.log(latitude, longitude);
     
+    // create a new map by passing HTMLElement
     let mapEle: HTMLElement = document.getElementById('map');
 
+    // create LatLng object
     let myLatLng = {lat: latitude, lng: longitude};
 
+    // create map
     this.map = new google.maps.Map(mapEle, {
       center: myLatLng,
       zoom: 12
