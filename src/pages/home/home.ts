@@ -20,10 +20,10 @@ export class HomePage {
   ) {}
 
   ionViewDidLoad(){
-    this.obtenerPosicion();
+    this.getPosition();
   }
 
-  obtenerPosicion():any{
+  getPosition():any{
     this.geolocation.getCurrentPosition()
     .then(response => {
       this.loadMap(response);
