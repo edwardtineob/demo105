@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
@@ -14,7 +14,7 @@ import { MyApp } from './app.component';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
