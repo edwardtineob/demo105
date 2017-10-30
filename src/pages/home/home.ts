@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage,NavController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, Loading } from 'ionic-angular';
 
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 
@@ -13,23 +13,28 @@ declare var google;
 export class HomePage {
 
   map: any;
+  loading: Loading;
 
   constructor(
-    public navCtrl: NavController,
-    public geolocation: Geolocation
+    private navCtrl: NavController,
+    private geolocation: Geolocation,
+    private loadCtrl: LoadingController
   ) {}
 
   ionViewDidLoad(){
+    this.loading = this.loadCtrl.create();
+    this.loading.present();
     this.getPosition();
   }
 
-  getPosition():any{
+  getPosition(): void{
     this.geolocation.getCurrentPosition()
     .then(response => {
       this.loadMap(response);
     })
     .catch(error =>{
       console.log(error);
+      this.loading.dismiss();
     })
   }
 
@@ -51,6 +56,7 @@ export class HomePage {
     });
 
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
+      this.loading.dismiss();
       let marker = new google.maps.Marker({
         position: myLatLng,
         map: this.map,
